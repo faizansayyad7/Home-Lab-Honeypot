@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Home Lab Honeypot Dashboard</title>
+
+<link rel="stylesheet"
+href="{{url_for('static',
+filename='style.css')}}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡 Home Lab Honeypot Dashboard</h1>
+
+<div class="buttons">
+
+<a href="/generate">
+
+<button>
+Generate Demo Traffic
+</button>
+
+</a>
+
+<a href="/clear">
+
+<button>
+Clear Logs
+</button>
+
+</a>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Events</h3>
+
+<p>{{total}}</p>
+
+</div>
+
+<div class="card">
+
+<h3>Unique IPs</h3>
+
+<p>{{unique}}</p>
+
+</div>
+
+<div class="card">
+
+<h3>Suspicious IPs</h3>
+
+<p>{{suspicious|length}}</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🚨 Security Alerts</h2>
+
+{% for ip in suspicious %}
+
+<p>
+⚠ Repeated activity detected from {{ip[0]}}
+</p>
+
+{% endfor %}
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>📋 Recent Activity</h2>
+
+<table>
+
+<tr>
+
+<th>IP</th>
+<th>Activity</th>
+<th>Time</th>
+
+</tr>
+
+{% for row in logs %}
+
+<tr>
+
+<td>{{row[1]}}</td>
+<td>{{row[2]}}</td>
+<td>{{row[3]}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
